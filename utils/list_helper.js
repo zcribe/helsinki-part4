@@ -3,6 +3,12 @@ const dummy = (blogs) => {
   // ...
 }
 
+const totalLikes = () => {
+  return 5;
+}
+
+
+
 module.exports = {
-  dummy
+  dummy, totalLikes
 }
