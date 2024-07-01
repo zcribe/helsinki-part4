@@ -53,3 +53,41 @@ describe("favourite blog", () => {
     assert.deepStrictEqual(result, listWithBlogs[1]);
   });
 });
+
+
+describe("most blog", () => {
+  const listWithBlogs = [
+    {
+      title: "Canonical string reduction",
+      author: "Edsger W. Dijkstra",
+      likes: 4
+    },
+    {
+      title: "Mega Canonical",
+      author: "W.",
+      likes: 12
+    },
+    {
+      title: "Mega Canonical",
+      author: "W.",
+      likes: 12
+    },
+    {
+      title: "Mega Canonical",
+      author: "W.",
+      likes: 12
+    },
+    {
+      title: "Peer reduction",
+      author: "Dijkstra",
+      likes: 2
+    },
+  ];
+
+  const expectedResult = {'W.': 2 };
+
+  test("when list has only one blog, equals the likes of that", () => {
+    const result = listHelper.mostBlog(listWithBlogs);
+    assert.deepStrictEqual(result, expectedResult);
+  });
+});
