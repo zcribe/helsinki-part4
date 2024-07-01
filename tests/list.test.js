@@ -27,24 +27,22 @@ describe("total likes", () => {
   });
 });
 
-
-
 describe("favourite blog", () => {
   const listWithBlogs = [
     {
       title: "Canonical string reduction",
       author: "Edsger W. Dijkstra",
-      likes: 4
+      likes: 4,
     },
     {
       title: "Mega Canonical",
       author: "W.",
-      likes: 12
+      likes: 12,
     },
     {
       title: "Peer reduction",
       author: "Dijkstra",
-      likes: 2
+      likes: 2,
     },
   ];
 
@@ -54,40 +52,76 @@ describe("favourite blog", () => {
   });
 });
 
-
 describe("most blog", () => {
   const listWithBlogs = [
     {
       title: "Canonical string reduction",
       author: "Edsger W. Dijkstra",
-      likes: 4
+      likes: 4,
     },
     {
       title: "Mega Canonical",
       author: "W.",
-      likes: 12
+      likes: 12,
     },
     {
       title: "Mega Canonical",
       author: "W.",
-      likes: 12
+      likes: 12,
     },
     {
       title: "Mega Canonical",
       author: "W.",
-      likes: 12
+      likes: 12,
     },
     {
       title: "Peer reduction",
       author: "Dijkstra",
-      likes: 2
+      likes: 2,
     },
   ];
 
-  const expectedResult = {'W.': 2 };
+  const expectedResult = { "W.": 2 };
 
   test("when list has only one blog, equals the likes of that", () => {
     const result = listHelper.mostBlog(listWithBlogs);
+    assert.deepStrictEqual(result, expectedResult);
+  });
+});
+
+describe("most likes", () => {
+  const listWithBlogs = [
+    {
+      title: "Canonical string reduction",
+      author: "Edsger W. Dijkstra",
+      likes: 4,
+    },
+    {
+      title: "Mega Canonical",
+      author: "W.",
+      likes: 12,
+    },
+    {
+      title: "Mega Canonical",
+      author: "W.",
+      likes: 12,
+    },
+    {
+      title: "Mega Canonical",
+      author: "W.",
+      likes: 12,
+    },
+    {
+      title: "Peer reduction",
+      author: "Dijkstra",
+      likes: 2,
+    },
+  ];
+
+  const expectedResult = { "W.": 36 };
+
+  test("when list has only one blog, equals the likes of that", () => {
+    const result = listHelper.mostLikes(listWithBlogs);
     assert.deepStrictEqual(result, expectedResult);
   });
 });
