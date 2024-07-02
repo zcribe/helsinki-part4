@@ -3,10 +3,10 @@ const mongoose = require("mongoose");
 const config = require("../utils/config");
 
 const blogSchema = new mongoose.Schema({
-  title: String,
+  title: {type: String, required: true},
+  url: {type: String, required: true},
   author: String,
-  url: String,
-  likes: Number,
+  likes: {type: Number},
 });
 
 blogSchema.set("toJSON", {
