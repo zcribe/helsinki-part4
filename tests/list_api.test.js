@@ -1,4 +1,5 @@
 const { test, after, beforeEach } = require('node:test')
+const assert = require('node:assert')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
@@ -17,6 +18,14 @@ test('blogs are returned as json', async () => {
     .get('/api/blogs')
     .expect(200)
     .expect('Content-Type', /application\/json/)
+})
+
+test('check that id field is used', async () => {
+  const response = await api.get('/api/blogs')
+  const contents = JSON.parse(response.text)[0]
+
+    assert(contents.hasOwnProperty('id'))
+
 })
 
 after(async () => {
