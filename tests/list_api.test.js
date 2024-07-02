@@ -2,6 +2,7 @@ const { test, after, beforeEach } = require('node:test')
 const assert = require('node:assert')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
+const helper = require('./test_helper')
 const app = require('../app')
 const Blog = require('../models/blog')
 
@@ -26,6 +27,24 @@ test('check that id field is used', async () => {
 
     assert(contents.hasOwnProperty('id'))
 
+})
+
+test('a valid blog can be added ', async () => {
+  const newBlog = {
+    title: 'async/await simplifies making async calls',
+    author: '1231'
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const blogsAtEnd = await helper.blogsInDb()
+    assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length + 1)
+  const titles = blogsAtEnd.map(n => n.title)
+    assert(titles.includes('async/await simplifies making async calls'))
 })
 
 after(async () => {

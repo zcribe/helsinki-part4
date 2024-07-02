@@ -1,6 +1,6 @@
 const Blog = require("../models/blog");
 
-const initialBlog = [
+const initialBlogs = [
   { title: "Asdi", author: "Meat", likes: 3, id: 5 },
   { title: "Asasdasdi", author: "Medasdaat", likes: 3, id: 56 },
 ];
@@ -19,7 +19,7 @@ const blogsInDb = async () => {
 };
 
 module.exports = {
-  initialNotes,
+  initialBlogs,
   nonExistingId,
   blogsInDb,
 };
