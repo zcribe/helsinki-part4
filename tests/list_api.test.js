@@ -47,6 +47,20 @@ test('a valid blog can be added ', async () => {
     assert(titles.includes('async/await simplifies making async calls'))
 })
 
+test('if the likes property is missing from the request, it will default to the value 0', async () => {
+  const newBlog = {
+    title: 'async/await simplifies making async calls',
+    author: '1231'
+  }
+
+  const response = await api
+    .post('/api/blogs')
+    .send(newBlog)
+
+
+    assert.strictEqual(response.body.likes, 0)
+})
+
 after(async () => {
   await mongoose.connection.close()
 })
