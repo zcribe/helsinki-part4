@@ -2,11 +2,12 @@ const { test, after, beforeEach } = require("node:test");
 const assert = require("node:assert");
 const mongoose = require("mongoose");
 const supertest = require("supertest");
-const helper = require("./test_helper");
 const app = require("../app");
-const Blog = require("../models/blog");
-
 const api = supertest(app);
+
+const helper = require("./test_helper");
+
+const Blog = require("../models/blog");
 
 const initialBlogs = [
   {
@@ -18,6 +19,7 @@ const initialBlogs = [
     url: "asdasda",
   },
 ];
+
 
 test("blogs are returned as json", async () => {
   await api
@@ -74,6 +76,17 @@ test("verify that if the title or url properties are missing from the request da
   };
 
   await api.post("/api/blogs").send(newBlog).expect(400);
+});
+
+test(" functionality for deleting a single blog post resource", async () => {
+  const newBlog = {
+    title: "1231",
+    url: "dasda",
+  };
+
+  const res = await api.post("/api/blogs").send(newBlog).expect(201);
+  await api.delete(`/api/blogs/${res.body.id}`).expect(200)
+  await api.get(`/api/blogs/${res.body.id}`).expect(404)
 });
 
 after(async () => {
