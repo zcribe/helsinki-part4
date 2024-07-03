@@ -6,6 +6,11 @@ blogRouter.get("/", async (request, response) => {
   response.json(blogs);
 });
 
+blogRouter.get("/:id", async (request, response) => {
+  const blogs = await Blog.findById(request.params.id);
+  response.json(blogs);
+});
+
 blogRouter.post("/", async (request, response) => {
   const body = request.body;
 
@@ -26,6 +31,19 @@ blogRouter.post("/", async (request, response) => {
 
 blogRouter.delete("/:id", async (request, response) => {
   const deletedBlog = await Blog.findByIdAndDelete(request.params.id);
+  response.json(deletedBlog);
+});
+
+blogRouter.put("/:id", async (request, response) => {
+  const body = request.body
+  const blog = {
+    title: body.title,
+    author: body.author,
+    url: body.url,
+    likes: body.likes
+  }
+
+  const deletedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, { new: true });
   response.json(deletedBlog);
 });
 

@@ -86,7 +86,25 @@ test(" functionality for deleting a single blog post resource", async () => {
 
   const res = await api.post("/api/blogs").send(newBlog).expect(201);
   await api.delete(`/api/blogs/${res.body.id}`).expect(200)
-  await api.get(`/api/blogs/${res.body.id}`).expect(404)
+  const result = await api.get(`/api/blogs/${res.body.id}`)
+  assert.strictEqual(result.body, null);
+});
+
+test("functionality for updating the information of an individual blog post.", async () => {
+  const newBlog = {
+    title: "1231",
+    url: "dasda",
+  };
+
+  const moddedBlog = {
+    title: 'Kalevipoeg',
+    url: 'maasikas'
+  }
+
+  const res = await api.post("/api/blogs").send(newBlog).expect(201);
+  await api.put(`/api/blogs/${res.body.id}`).send(moddedBlog).expect(200)
+  const responseBlog = await api.get(`/api/blogs/${res.body.id}`).expect(200)
+  assert.strictEqual(responseBlog.body.title, 'Kalevipoeg');
 });
 
 after(async () => {
