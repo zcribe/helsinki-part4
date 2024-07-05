@@ -11,12 +11,12 @@ const Blog = require('../models/blog')
 
 const initialBlogs = [
   {
-    title: 'asdasd',
-    url: 'adasdas',
+    title: 'amet nisi at',
+    url: 'https://imaginary-hydraulics.info',
   },
   {
-    title: 'dasdasca',
-    url: 'asdasda',
+    title: 'aliquam ipsam sint',
+    url: 'http://overcooked-gambling.com',
   },
 ]
 
@@ -37,9 +37,9 @@ test('check that id field is used', async () => {
 
 test('a valid blog can be added ', async () => {
   const newBlog = {
-    title: 'async/await simplifies making async calls',
-    author: '1231',
-    url: 'asda',
+    title: 'ut qui sed',
+    author: 'Naomi Harris',
+    url: 'https://forked-alpenglow.biz',
   }
 
   await api
@@ -51,14 +51,14 @@ test('a valid blog can be added ', async () => {
   const blogsAtEnd = await helper.blogsInDb()
   assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length + 1)
   const titles = blogsAtEnd.map((n) => n.title)
-  assert(titles.includes('async/await simplifies making async calls'))
+  assert(titles.includes('ut qui sed'))
 })
 
 test('if the likes property is missing from the request, it will default to the value 0', async () => {
   const newBlog = {
-    title: 'async/await simplifies making async calls',
-    author: '1231',
-    url: '/3234',
+    title: 'provident ratione reprehenderit',
+    author: 'Mr. Andrea Champlin',
+    url: 'http://brave-prizefight.name',
   }
 
   const response = await api
@@ -72,7 +72,7 @@ test('if the likes property is missing from the request, it will default to the 
 
 test('verify that if the title or url properties are missing from the request data, the backend responds to the request with the status code 400', async () => {
   const newBlog = {
-    author: '1231',
+    author: 'Damon Carter',
   }
 
   await api.post('/api/blogs').send(newBlog).expect(400)
@@ -80,8 +80,8 @@ test('verify that if the title or url properties are missing from the request da
 
 test(' functionality for deleting a single blog post resource', async () => {
   const newBlog = {
-    title: '1231',
-    url: 'dasda',
+    title: 'voluptas et aut',
+    url: 'https://high-level-dancer.name',
   }
 
   const res = await api.post('/api/blogs').send(newBlog).expect(201)
@@ -106,6 +106,7 @@ test('functionality for updating the information of an individual blog post.', a
   const responseBlog = await api.get(`/api/blogs/${res.body.id}`).expect(200)
   assert.strictEqual(responseBlog.body.title, 'enim omnis officia')
 })
+
 
 after(async () => {
   await mongoose.connection.close()
