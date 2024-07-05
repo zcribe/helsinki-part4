@@ -92,19 +92,19 @@ test(' functionality for deleting a single blog post resource', async () => {
 
 test('functionality for updating the information of an individual blog post.', async () => {
   const newBlog = {
-    title: '1231',
-    url: 'dasda',
+    title: 'aut quis vel',
+    url: 'https://definite-feng.com',
   }
 
   const moddedBlog = {
-    title: 'Kalevipoeg',
-    url: 'maasikas'
+    title: 'enim omnis officia',
+    url: 'https://outlandish-trustee.org'
   }
 
   const res = await api.post('/api/blogs').send(newBlog).expect(201)
   await api.put(`/api/blogs/${res.body.id}`).send(moddedBlog).expect(200)
   const responseBlog = await api.get(`/api/blogs/${res.body.id}`).expect(200)
-  assert.strictEqual(responseBlog.body.title, 'Kalevipoeg')
+  assert.strictEqual(responseBlog.body.title, 'enim omnis officia')
 })
 
 after(async () => {
