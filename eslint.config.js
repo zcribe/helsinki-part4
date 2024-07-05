@@ -1,17 +1,48 @@
-import globals from "globals";
-import js from "@eslint/js";
-import pluginJs from "@eslint/js";
+const globals = require('globals')
+const js = require('@eslint/js')
+const stylisticJs = require('@stylistic/eslint-plugin-js')
 
-export default [
-  js.configs.recommended,
+module.exports = [
   {
-    files: ["**/*.js"],
-    languageOptions: {
-      sourceType: "commonjs",
-      globals: { ...globals.node },
-      ecmaVersion: "latest",
+    plugins: {
+      '@stylistic/js': stylisticJs
+    },
+    rules: {
+      '@stylistic/js/indent': [
+        'error',
+        2
+      ],
+      '@stylistic/js/linebreak-style': [
+        'error',
+        'unix'
+      ],
+      '@stylistic/js/quotes': [
+        'error',
+        'single'
+      ],
+      '@stylistic/js/semi': [
+        'error',
+        'never'
+      ],
     },
   },
-  { languageOptions: { globals: globals.browser } },
-  pluginJs.configs.recommended,
-];
+
+  js.configs.recommended,
+  {
+    files: ['**/*.js'],
+    languageOptions: {
+      sourceType: 'commonjs',
+      globals: { ...globals.node }, 
+      ecmaVersion: 'latest',
+    },
+    rules: {
+      'no-unused-vars': 'error',
+      'no-undef': 'error'
+    }
+  },
+  {
+    languageOptions: {
+      globals: globals.browser 
+    }
+  }
+]
